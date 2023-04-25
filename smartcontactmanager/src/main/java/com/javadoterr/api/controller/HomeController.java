@@ -46,12 +46,10 @@ public class HomeController {
 	public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result,
 										Model model, HttpSession session) {
 		
-//		if(agreement == null) {
-//			System.out.println("You have not agreeed the terms and conditions!");
-//		}
 		
 		try {
 			
+			//agreement is not working
 			/* 
 			 * if(!agreement) {
 			 * System.out.println("You have not agreed the terms and conditions !"); throw
