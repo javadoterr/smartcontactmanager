@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home Page</title>
+    
+  </head>
+  <body>
+    
+    <section>
+	   <div class="container">
+		   <div class="col-md-6 offset-md-3">
+			<div class="my-card">
+				
+				<!--alert message -->
+				<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+					<p th:text="${session.message.content}"></p>
+					
+					<!--<th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
+					
+				</div>
+				<!--end of alert message -->
+				
+				<div class="text-center">
+					<img style="width:100px;" th:src="@{/img/membership.png}"></img>					
+				</div>
+				
+				
+				<h1 class="text-center">Reigster Here !!</h1>
+				
+				<form novalidate action="" th:action="@{/do_register}" method="post" th:object="${user}"> 
+					<div class="mb-3">
+						<label for="name" class="form-label">Name</label>
+						<input type="text" class="form-control"
+						
+							th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+							 
+							id="name" name="name" th:value="${user.name}"
+							aria-describedby="nameHelp" required />
+						<div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
+							
+						</div>
+						
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label">Email</label>
+						<input type="email" class="form-control" 
+												id="email" name="email"
+												th:value="${user.email}" 
+												required>
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label">Password</label>
+						<input type="password" class="form-control" 
+												id="password" name="password" 
+												required>
+					</div>
+					<div class="mb-3">
+						<label for="about">About</label>
+						<textarea class="form-control" id="about" name="about"
+							style="height: 100px" th:value="${user.about}"></textarea>
+					</div>
+					<!--<div class="mb-3 form-check">
+						<input type="checkbox" class="form-check-input" id="agreement" name="agreement">
+						<label class="form-check-label" for="agreement">Accept Terms & Conditions.</label>
+					</div>-->
+					<div class="container text-center">
+						<button type="submit" class="btn bg-primary">Submit</button>
+						<button type="reset" class="btn btn-warning">Reset</button>
+					</div>
+				</form>
+			</div>
+		   </div>
+	   </div>	    		
+	</section>
+    
+    
+  </body>
+</html>
