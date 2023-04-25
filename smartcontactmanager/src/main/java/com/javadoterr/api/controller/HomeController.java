@@ -1,13 +1,13 @@
 package com.javadoterr.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javadoterr.api.dao.UserRepositoy;
 import com.javadoterr.api.entity.User;
@@ -18,6 +18,9 @@ import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	@Autowired
 	private UserRepositoy userRepositoy;
@@ -61,6 +64,7 @@ public class HomeController {
 				return "signup";
 			}
 			
+			user.setPassword(encoder.encode(user.getPassword()));
 			user.setRole("ROLE_USER");
 			user.setEnables(true);
 			user.setImageUrl("default.jpg");
