@@ -22,7 +22,7 @@ public class SmartContactConfig {
 			.requestMatchers("/user/**").hasRole("USER")
 			.requestMatchers("/**").permitAll()
 			.and()
-			.formLogin()
+			.formLogin().loginPage("/signin")
 			.and()
 			.authenticationProvider(daoAuthenticationProvider());
 			
