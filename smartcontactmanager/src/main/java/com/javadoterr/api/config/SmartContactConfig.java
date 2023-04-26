@@ -23,6 +23,7 @@ public class SmartContactConfig {
 			.requestMatchers("/**").permitAll()
 			.and()
 			.formLogin().loginPage("/signin")
+			.loginProcessingUrl("/dologin").defaultSuccessUrl("/user/index")
 			.and()
 			.authenticationProvider(daoAuthenticationProvider());
 			
