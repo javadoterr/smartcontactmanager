@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Add Contact Form</title>
+
+</head>
+
+<body>
+
+	<section>
+		<div class="card me-5 ms-5">
+			<div class="card-body">
+				<h1 class="text-center">Add Contact</h1>
+				<div class="container mt-1">
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+							<form action="#" th:object="${contact}" 
+										enctype="multipart/form-data" method="post"
+										th:action="@{/user/process-contact}"
+										class="mt-2">
+										
+								<!-- name -->
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="name">
+										<i class="fa-solid fa-user-plus"></i>
+									</span>
+									<input type="text" class="form-control"
+													id="name" name="name" 
+													placeholder="name" aria-label="name"
+													aria-describedby="name" />
+								</div>
+								<!-- name -->
+								<!-- second name -->
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="secondname">
+										<i class="fa-sharp fa-solid fa-user-plus"></i>
+									</span>
+									<input type="text" class="form-control"
+													id="secondname" name="secondname" 
+													placeholder="secondname" aria-label="secondname"
+													aria-describedby="secondname" />
+								</div>
+								<!-- second name -->
+								<!-- phone -->
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="phone">
+										<i class="fa-solid fa-phone"></i>
+									</span>
+									<input type="number" class="form-control"
+													id="phone" name="phone" 
+													placeholder="phone" aria-label="phone"
+													aria-describedby="phone" />
+								</div>
+								<!-- phone -->
+								<!-- email -->
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="email">
+										<i class="fa-solid fa-at"></i>
+									</span>
+									<input type="email" class="form-control"
+													id="email" name="email" 
+													placeholder="email" aria-label="email"
+													aria-describedby="email" />
+								</div>
+								<!-- email -->
+								<!-- work -->
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="work">
+										<i class="fa-solid fa-briefcase"></i>
+									</span>
+									<input type="text" class="form-control"
+													id="work" name="work" 
+													placeholder="work" aria-label="work"
+													aria-describedby="work" />
+								</div>
+								<!-- work -->
+								
+								<!-- contact description -->
+								<div class="input-group mb-3">
+									<textarea class="form-control" placeholder="contact description" 
+												id="description" name="description" 
+													style="height: 100px"></textarea>
+								</div>
+								<!-- contact description -->
+								<!-- image -->
+								<div class="input-group mb-3 custom-file">
+									<label class="input-group-text" for="image">
+										Upload Image
+									</label>
+  									<input type="file" class="form-control" id="image" name="image" />
+								</div>								
+								<!-- image -->	
+								<div class="container text-center">
+									<button type="submit" class="btn btn-outline-primary"> Save Contact</button>
+								</div>							
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+</body>
+
+</html>
