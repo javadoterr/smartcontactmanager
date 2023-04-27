@@ -1,9 +1,9 @@
 package com.javadoterr.api.entity;
 
-import jakarta.persistence.CascadeType;
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,7 +12,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "CONTACT")
-public class Contact {
+public class Contact implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -106,12 +109,12 @@ public class Contact {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "Contact [cId=" + cId + ", name=" + name + ", secondName=" + secondName + ", work=" + work + ", email="
-				+ email + ", phone=" + phone + ", image=" + image + ", description=" + description + ", user=" + user
-				+ "]";
-	}
+	/*
+	 * @Override public String toString() { return "Contact [cId=" + cId + ", name="
+	 * + name + ", secondName=" + secondName + ", work=" + work + ", email=" + email
+	 * + ", phone=" + phone + ", image=" + image + ", description=" + description +
+	 * ", user=" + user + "]"; }
+	 */
 	
 	
 

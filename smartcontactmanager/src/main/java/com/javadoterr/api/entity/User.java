@@ -1,5 +1,6 @@
 package com.javadoterr.api.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,12 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
