@@ -25,6 +25,7 @@ public class Contact implements Serializable{
 	private String work;
 	private String email;
 	private String phone;
+	@Column(nullable = true)
 	private String image;
 	@Column(length = 500)
 	private String description;

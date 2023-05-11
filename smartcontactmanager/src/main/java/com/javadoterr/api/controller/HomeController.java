@@ -68,7 +68,7 @@ public class HomeController {
 			user.setEnables(true);
 			user.setImageUrl("default.jpg");
 
-			User savedUser = userRepositoy.save(user);
+			userRepositoy.save(user);
 
 			model.addAttribute("user", new User());
 			model.addAttribute("title", "Signup");

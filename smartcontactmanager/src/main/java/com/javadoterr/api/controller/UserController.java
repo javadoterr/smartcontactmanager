@@ -1,18 +1,31 @@
 package com.javadoterr.api.controller;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.javadoterr.api.dao.ContactRepository;
 import com.javadoterr.api.dao.UserRepositoy;
 import com.javadoterr.api.entity.Contact;
 import com.javadoterr.api.entity.User;
+import com.javadoterr.api.helper.Message;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(path = "/user")
@@ -20,6 +33,9 @@ public class UserController {
 
 	@Autowired
 	private UserRepositoy userRepositoy;
+	
+	@Autowired
+	private ContactRepository contactRepository;
 
 	
 	//this method execute for every end point of method to add data in model
@@ -58,20 +74,82 @@ public class UserController {
 	
 	//handler for processing the contact form
 	@PostMapping(path = "/process-contact")
-	public String processContact(@ModelAttribute Contact contact, Principal principal) {
+	public String processContact(@ModelAttribute Contact contact,
+//												@RequestParam MultipartFile file,
+												Principal principal,
+												HttpSession session) {
+		
+		System.out.println("processContact method called....");
+		
+		try {
 		
 		String name = principal.getName();
 		User user = this.userRepositoy.getUserByUserName(name);
+		
+		//processing and uploading file
+//		if(file.isEmpty()) {
+//			//if the file is empty then try our message
+//			System.out.println("File is emplty !");
+//		}else {
+//			//upload the file to folder and update the name to contact
+//			String originalFilename = file.getOriginalFilename();
+//			System.out.println("File - "+ originalFilename);
+//			contact.setImage(file.getOriginalFilename());
+//			
+//			//save the image in image folder of static
+//			File saveFileLocation = new ClassPathResource("static/img").getFile();
+//			
+//			//creating the path to save the image 
+//			Path path = Paths.get(saveFileLocation.getAbsolutePath()+File.separator+file.getOriginalFilename());
+//			
+//			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+//			
+//			System.out.println("Image is uploaded !");
+//			
+//			
+//		}
 		
 		contact.setUser(user);
 		
 		user.getContacts().add(contact);
 		
+		
+		
+		
+		this.userRepositoy.save(user);
+		
 		System.out.println(contact);
 		
-		System.out.println("Added to data base");
+		System.out.println("Added to data base"); 
+		
+		//message success
+		session.setAttribute("message", new Message("Your contact is added !! Add More...", "success"));
+		
+		
+		}catch(Exception e) {
+			System.out.println("ERROR "+ e.getMessage());
+			e.printStackTrace();
+			//message error
+			session.setAttribute("message", new Message("Something went wrong !! try again...", "danger"));
+		}
 		
 		return "normal/add_contact_form";
+	}
+	
+	//show contacts handler
+	@GetMapping(path = "/show-contacts")
+	public String showContacts(Model model, Principal principal) {
+		
+		model.addAttribute("title", "Show User Contacts");
+		
+		String nameName = principal.getName();
+		User savedUser = this.userRepositoy.getUserByUserName(nameName);
+		
+		List<Contact> contacts = this.contactRepository.findContactsByUser(savedUser.getId());
+		
+		model.addAttribute("contacts", contacts);
+		
+		return "normal/show_contacts";
 	}
 	
 	
