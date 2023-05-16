@@ -30,8 +30,17 @@
 							
 							<tr th:each="c:${contacts}">
 								<th scope="row" th:text="'SCM2023 - '+${c.cId}"></th>
-								<td th:text="${c.name}"></td>
-								<td th:text="${c.email}"></td>
+								
+								<td>
+									<img src="" class="my_profile_picture" th:src="@{'/img/'+${c.image}}" alt="profile photo" /> 
+									<span th:text="${c.name}"></span>
+								</td>
+								
+								<td>
+									<a href="#" th:href="@{'/user/contact/'+${c.cId}}">
+										<span th:text="${c.email}"></span>
+									</a>
+								</td>
 								<td th:text="${c.phone}"></td>
 								<td>
 									<button class="btn btn-danger btn-sm">Delete</button>
