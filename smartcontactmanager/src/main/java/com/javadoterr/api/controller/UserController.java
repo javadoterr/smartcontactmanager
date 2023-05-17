@@ -202,6 +202,26 @@ public class UserController {
 	}
 	
 	
+	//open update form handler
+	@PostMapping(path = "/open-contact/{cId}")
+	public String updateForm(@PathVariable("cId") Integer cId, Model model) {
+		
+		model.addAttribute("title", "Update Content");
+		Optional<Contact> contactOptional = this.contactRepository.findById(cId);
+		Contact contact = contactOptional.get();
+		
+		model.addAttribute("contact", contact);
+		return "normal/update_form";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }
