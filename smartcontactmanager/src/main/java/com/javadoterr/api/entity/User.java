@@ -42,7 +42,7 @@ public class User implements Serializable{
 	@Column(length = 500)
 	private String about;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
 	private List<Contact> contacts = new ArrayList<>();
 
 	public User() {

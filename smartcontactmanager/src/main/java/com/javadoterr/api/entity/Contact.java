@@ -117,7 +117,10 @@ public class Contact implements Serializable{
 	 * ", user=" + user + "]"; }
 	 */
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		return this.cId == ((Contact) obj).getcId();
+	}
 
 	
 
