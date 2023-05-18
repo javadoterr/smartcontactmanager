@@ -23,6 +23,10 @@
 										th:action="@{/user/process-update}"
 										class="mt-2">
 										
+										
+								<input type="hidden" th:value="${contact.cId}" name="cId" id="cId" />		
+								
+										
 								<!-- name -->
 								<div class="input-group mb-3">
 									<span class="input-group-text" id="name">

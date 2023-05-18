@@ -215,7 +215,21 @@ public class UserController {
 	}
 	
 	
-	
+	//update contact handler
+	@PostMapping(path = "/process-update")
+	public String updateHandler(@ModelAttribute Contact contact, 
+											Model model, HttpSession session, Principal principal) {
+		
+		User user = this.userRepositoy.getUserByUserName(principal.getName());
+		contact.setUser(user);
+		contact.setImage("contact.png");
+		this.contactRepository.save(contact);
+		
+		session.setAttribute("message", new Message("Your contact is updated...", "success"));
+		
+		
+		return "redirect:/user/show-contacts/0";
+	}
 	
 	
 	
