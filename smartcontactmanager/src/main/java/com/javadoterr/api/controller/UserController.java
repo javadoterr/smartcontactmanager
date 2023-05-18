@@ -235,7 +235,13 @@ public class UserController {
 		return "redirect:/user/show-contacts/0";
 	}
 	
-	
+	//your profile handler
+	@GetMapping(path = "/profile")
+	public String yourProfileHandler(Model model) {
+		model.addAttribute("title", "Profile Page");
+		
+		return "normal/profile";
+	}
 	
 	
 	

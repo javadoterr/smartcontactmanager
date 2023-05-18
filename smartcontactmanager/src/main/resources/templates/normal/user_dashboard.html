@@ -10,10 +10,21 @@
   <body>
     
     <section>
-	    <div class="text-center">
-			
-			<h1>This is your private dashboard</h1>
-			
+	    <div class="container">
+			<div class="card">
+				<div class="cord-body my-5">
+					<div class="container text-center">
+						<img src="" style="width:200px; height: 200px;" class="my_profile_picture" th:src="@{'/img/contact_logo.png'}" alt="profile photo" />
+					</div>
+					<h1 class="text-center m-3 text-secondary font-italic font-weight-light">
+						 Start Adding your contact on cloud...
+					</h1>
+					<div class="container text-center mb-3">
+						<a th:href="@{/user/add-contact}" class="btn btn-primary text-uppercase">Add New Contact</a>						
+					</div>
+					 
+				</div>
+			</div>
 		</div>		
 	</section>
     
